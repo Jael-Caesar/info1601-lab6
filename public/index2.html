@@ -64,7 +64,20 @@ async function getData(url){
   }
 }
 
-getData("https://api.openbrewerydb.org/breweries/search?query=harry")
+getData("https://www.openbrewerydb.org/breweries?query=harry")
+
+ async function getData2(url, renderFun){
+        try{
+          let response = await fetch(url);//1. Send http request and get response
+          let result = await response.json();//2. Get data from response
+          renderFun(result);// 3. Do something with the data
+        }catch(e){
+            console.log(e);//catch and log any errors
+        }
+      }
+
+//get all brewery data on page load and render a table
+getData2("https://api.openbrewerydb.org/breweries", drawTable)
      </script>
   </body>
 </html>
